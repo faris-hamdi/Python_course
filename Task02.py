@@ -26,18 +26,4 @@ for i in range(3):
 if n == 0:
     print("GAME OVER")
 
-    elif 2 == operation:
-        print(num1," - ",num2," = ", sub_fun(num1, num2))
-
-    elif 3 == operation:
-        print(num1," * ",num2," = ", mul_fun(num1, num2))
-
-    elif 4 == operation:
-        print(num1," / ",num2," = ", div_fun(num1, num2))
-
-    elif 5 == operation:
-        print(num1," ^ ",num2," = ",pow_fun(num1, num2))
-else:
-    print("Enter your Decimal number: ")
-    dec_num = int(input())
-    print(dec_num," in binary"," = ",bin_fun(dec_num))
+   
