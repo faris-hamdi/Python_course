@@ -1,9 +1,8 @@
 # Prediction Game
 
 import random
-i =0
-n=3
 
+n=3
 random_num = random.randint(0,6)
 print("Welcome in the prediction game\nYou have three attempts to predict my number\n")
 for i in range(3):
