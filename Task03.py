@@ -1,23 +1,23 @@
 faris = {
     "user_name": "farishamdi0000",
     "password": "123456",
-    "name": "Faris Hamdi",
-    "id": "30309181203331",
+    "name": "Faris Hamdi Rizk",
+    "id": "",
 
 
 }
 amir = {
     "user_name": "amirhamdi0000",
     "password": "000000",
-    "name": "Faris Hamdi",
+    "name": "Amir Hamdi Rizk",
     "id": "",
 
 }
 ibrahim = {
     "user_name": "ibrahimhamdi0000",
     "password": "666666",
-    "name": "Ibrahim Hamdi",
-    "id": "",
+    "name": "Ibrahim Hamdi Rizk",
+    "id":"",
 
 }
 governorate_code = {
@@ -49,7 +49,7 @@ elif user_name == ibrahim["user_name"] and password == ibrahim["password"]:
 
 else:
     print("Invalid username or password!! ")
-    
+
 
 
 
