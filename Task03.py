@@ -133,7 +133,7 @@ if case_n == '1':
             print("Gender : " + faris["gender"])
 
         faris["birth_order"] = faris["id"][9:13]
-        print("Your birth order on your birthday : " + faris["birth order"] + "\nThank You.")
+        print("Your birth order on your birthday : " + faris["birth_order"] + "\nThank You.")
 
         # Call the function to generate and print the QR code
         generate_and_print_qr_code(faris)
@@ -162,7 +162,7 @@ if case_n == '1':
             print("Gender : " + amir["gender"])
 
         amir["birth_order"] = amir["id"][9:13]
-        print("Your birth order on your birthday : " + amir["birth order"] + "\nThank You.")
+        print("Your birth order on your birthday : " + amir["birth_order"] + "\nThank You.")
 
         generate_and_print_qr_code(amir)
 
@@ -191,7 +191,7 @@ if case_n == '1':
             print("Gender : " + ibrahim["gender"])
 
         ibrahim["birth_order"] = ibrahim["id"][9:13]
-        print("Your birth order on your birthday : " + ibrahim["birth order"] + "\nThank You.")
+        print("Your birth order on your birthday : " + ibrahim["birth_order"] + "\nThank You.")
 
         generate_and_print_qr_code(ibrahim)
 
@@ -228,9 +228,10 @@ elif case_n == '2':
         print("Gender : " + new_one["gender"])
 
     new_one["birth_order"] = new_one["id"][9:13]
-    print("Your birth order on your birthday : " + new_one["birth order"] + "\nThank You.")
+    print("Your birth order on your birthday : " + new_one["birth_order"] + "\nThank You.")
 
     generate_and_print_qr_code(new_one)
 
 else:
     print("Invalid inputs")
+ 
