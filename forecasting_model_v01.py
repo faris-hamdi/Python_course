@@ -22,26 +22,19 @@ model = LinearRegression()
 # Fit the model to the data
 model.fit(df[['month', 'year']], df['price'])
 
-# Create a list of months and years for measuring performance
-start_date_measuring = pd.to_datetime('1/1/2019')
-end_date_measuring = pd.to_datetime('10/1/2023')
-measuring_dates = pd.date_range(start_date_measuring, end_date_measuring, freq='MS')
-
-# Create lists to store results for measuring performance
-measuring_dates = measuring_dates.tolist()
-measuring_prices = df.loc[df['date'].between(start_date_measuring, end_date_measuring), 'price'].tolist()
-
 # Create a list of months and years for which to make predictions
-start_date_predicting = pd.to_datetime('11/1/2023')
-end_date_predicting = pd.to_datetime('10/1/2027')
-prediction_dates = pd.date_range(start_date_predicting, end_date_predicting, freq='MS')
+start_date = pd.to_datetime('1/1/2022')
+end_date = pd.to_datetime('10/1/2027')
+date_range = pd.date_range(start_date, end_date, freq='MS')
 
-# Create lists to store results for making predictions
+# Create lists to store results for plotting
+all_dates = df['date'].tolist()
+all_prices = df['price'].tolist()
 predicted_dates = []
 predicted_prices = []
 
 # Make predictions for each month
-for date in prediction_dates:
+for date in date_range:
     month = date.month
     year = date.year
 
@@ -58,36 +51,27 @@ for date in prediction_dates:
     # Print the prediction result in the console
     print(f"Year: {year}, Month: {month}, Prediction: {prediction[0]}")
 
-# Calculate evaluation metrics using the actual data for measuring performance
-measuring_prices_actual = df.loc[df['date'].between(start_date_measuring, end_date_measuring), 'price']
-mae_measuring = mean_absolute_error(measuring_prices_actual, measuring_prices)
-mse_measuring = mean_squared_error(measuring_prices_actual, measuring_prices)
-rmse_measuring = np.sqrt(mse_measuring)
-r2_measuring = r2_score(measuring_prices_actual, measuring_prices)
+# Calculate evaluation metrics using the overlapping period
+overlap_start_date = pd.to_datetime('1/1/2022')
+overlap_end_date = pd.to_datetime('10/1/2023')
+overlap_actual_prices = df.loc[df['date'].between(overlap_start_date, overlap_end_date), 'price']
+overlap_predicted_prices = predicted_prices[:12]
 
-# Print the evaluation metrics for measuring performance
-print("Performance Metrics Using Measuring Period:")
-print(f"Mean Absolute Error (MAE): {mae_measuring}")
-print(f"Mean Squared Error (MSE): {mse_measuring}")
-print(f"Root Mean Squared Error (RMSE): {rmse_measuring}")
-print(f"R-squared (R2) Score: {r2_measuring}")
+mae = mean_absolute_error(overlap_actual_prices, overlap_predicted_prices)
+mse = mean_squared_error(overlap_actual_prices, overlap_predicted_prices)
+rmse = np.sqrt(mse)
+r2 = r2_score(overlap_actual_prices, overlap_predicted_prices)
 
-# Calculate evaluation metrics for the predicted period
-mae_predicting = mean_absolute_error(df.loc[df['date'].between(start_date_predicting, end_date_predicting), 'price'], predicted_prices)
-mse_predicting = mean_squared_error(df.loc[df['date'].between(start_date_predicting, end_date_predicting), 'price'], predicted_prices)
-rmse_predicting = np.sqrt(mse_predicting)
-r2_predicting = r2_score(df.loc[df['date'].between(start_date_predicting, end_date_predicting), 'price'], predicted_prices)
-
-# Print the evaluation metrics for the predicted period
-print("Performance Metrics Using Predicted Period:")
-print(f"Mean Absolute Error (MAE): {mae_predicting}")
-print(f"Mean Squared Error (MSE): {mse_predicting}")
-print(f"Root Mean Squared Error (RMSE): {rmse_predicting}")
-print(f"R-squared (R2) Score: {r2_predicting}")
+# Print the evaluation metrics for the overlapping period
+print("Performance Metrics Using Overlapping Period:")
+print(f"Mean Absolute Error (MAE): {mae}")
+print(f"Mean Squared Error (MSE): {mse}")
+print(f"Root Mean Squared Error (RMSE): {rmse}")
+print(f"R-squared (R2) Score: {r2}")
 
 # Combine the original dataset with prediction results
-combined_dates = df['date'].tolist() + predicted_dates
-combined_prices = df['price'].tolist() + predicted_prices
+combined_dates = all_dates + predicted_dates
+combined_prices = all_prices + predicted_prices
 
 # Create a time series plot
 plt.figure(figsize=(12, 6))
